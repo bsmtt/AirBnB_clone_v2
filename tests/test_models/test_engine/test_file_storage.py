@@ -4,13 +4,16 @@ import unittest
 from models.base_model import BaseModel
 from models import storage
 import os
-
+from models.engine.file_storage import FileStorage
+from models.base_model import BaseModel
 
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
     def setUp(self):
         """ Set up test environment """
+        self.storage = FileStorage()
+        self.base = BaseModel()
         del_list = []
         for key in storage._FileStorage__objects.keys():
             del_list.append(key)
@@ -40,6 +43,12 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         temp = storage.all()
         self.assertIsInstance(temp, dict)
+
+    def test_all_cls(self):
+        """Test all method with specified cls."""
+        obj = self.storage.all(BaseModel)
+        self.assertEqual(type(obj), dict)
+        self.assertEqual(len(obj), 0)
 
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
@@ -107,3 +116,11 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_delete(self):
+        """Test delete method."""
+        bm = BaseModel()
+        key = "{}.{}".format(type(bm).__name__, bm.id)
+        FileStorage._FileStorage__objects[key] = bm
+        self.storage.delete(bm)
+        self.assertNotIn(bm, FileStorage._FileStorage__objects)
