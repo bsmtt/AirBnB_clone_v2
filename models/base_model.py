@@ -27,8 +27,8 @@ class BaseModel:
                                                      '%Y-%m-%dT%H:%M:%S.%f')
             if "id" not in kwargs:
                 kwargs['id'] = str(uuid.uuid4())
-            
-            del kwargs['__class__']
+            if "__class__"  in kwargs:
+                del kwargs['__class__']
             self.__dict__.update(kwargs)
 
     def __str__(self):
