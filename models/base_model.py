@@ -17,14 +17,17 @@ class BaseModel:
         else:
             if "created_at" not in kwargs:
                 kwargs['created_at'] = datetime.now()
+            else:
+                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
             if "updated_at" not in kwargs:
                 kwargs['updated_at'] = datetime.now()
+            else:
+                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
             if "id" not in kwargs:
                 kwargs['id'] = str(uuid.uuid4())
-            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            
             del kwargs['__class__']
             self.__dict__.update(kwargs)
 
