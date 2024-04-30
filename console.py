@@ -119,21 +119,22 @@ class HBNBCommand(cmd.Cmd):
             if not args:
                 print("** class name missing **")
                 return
-            elif args.split(" ")[0] not in HBNBCommand.classes:
+            if args.split(" ")[0] not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
             arg_list = args.split(" ")
             kw = {}
             for arg in arg_list[1:]:
-                arg_keyvalue = arg.split("=")
-                if arg_keyvalue[1].startswith('"'):
-                    arg_keyvalue[1] = arg_keyvalue[1].strip('"').replace("_", " ")
+                key = arg.split("=")[0]
+                value = arg.split("=")[1]
+                if value.startswith('"'):
+                    value = value.strip('"').replace("_", " ")
                 else:
                     try:
-                        arg_keyvalue[1] = eval(arg_keyvalue[1])
+                        value = eval(value)
                     except (SyntaxError, NameError):
                         continue
-                kw[arg_keyvalue[0]] = arg_keyvalue[1]
+                kw[key] = value
 
             if kw == {}:
                 new_instance = eval(arg_list[0])()
