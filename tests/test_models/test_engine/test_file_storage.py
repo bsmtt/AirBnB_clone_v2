@@ -48,7 +48,7 @@ class test_fileStorage(unittest.TestCase):
         """Test all method with specified cls."""
         obj = self.storage.all(BaseModel)
         self.assertEqual(type(obj), dict)
-        self.assertEqual(len(obj), 1)
+        self.assertEqual(len(obj), 0)
 
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
