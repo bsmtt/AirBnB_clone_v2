@@ -24,10 +24,10 @@ def hbnb():
     return "HBNB"
 
 @app.route("/c/<text>", strict_slashes=False)
-def c(text):
-    """Displays 'C' followed by the value of <text>."""
-    text = text.replace("_", " ")
-    return "C {}".format(text)
+def c_is_what(text):
+    """Displays 'C' followed by  <text>."""
+    t = text.replace("_", " ")
+    return "C {}".format(t)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
