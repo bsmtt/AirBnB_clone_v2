@@ -6,6 +6,8 @@ The application listens on 0.0.0.0, port 5000.
 Routes:
     /: Displays 'Hello HBNB!'.
     /hbnb: Displays 'HBNB'.
+    /c/<text>: Display 'c'.
+    /python/<text>: Display 'python'.
 """
 from flask import Flask
 
