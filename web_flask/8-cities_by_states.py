@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Routes:
     /cities_by_states: HTML page with a list of all states and related cities.
