@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" 
+"""
 a Flask web application.
 
 The application listens on 0.0.0.0, port 5000.
@@ -61,6 +61,7 @@ def number(n):
 def num_template(n):
     """Displays an HTML page"""
     return render_template("5-number.html", n=n)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
